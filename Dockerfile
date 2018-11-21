@@ -1,12 +1,12 @@
 ARG TAG="20181113-edge"
-ARG BUILDDEPS="wget ssl_client"
+ARG DOWNLOADSDIR="/permalink"
+ARG DOWNLOADS="https://raw.githubusercontent.com/sourcepole/qwc2-server/master/permalink.py"
 ARG BUILDCMDS=\
-"   mkdir /permalink "\
-"&& wget -O /permalink/permalink.py https://raw.githubusercontent.com/sourcepole/qwc2-server/master/permalink.py "\
-"&& sed -i '/CORS/d' /permalink/permalink.py "\
+"   sed -i '/CORS/d' $DOWNLOADSDIR/permalink.py "\
 "&& pip3 install flask gunicorn"
 ARG RUNDEPS="python3"
 ARG EXECUTABLES="/usr/bin/python3"
+ARG REMOVEFILES="/usr/bin/easy_install-3.6 /usr/bin/pyvenv* /usr/bin/2to3-3.6 /usr/bin/pip3* /usr/bin/pydoc3* /usr/bin/2to3 /usr/bin/python3.6m" 
 
 #---------------Don't edit----------------
 FROM ${CONTENTIMAGE1:-scratch} as content1
