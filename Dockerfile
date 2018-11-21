@@ -6,7 +6,7 @@ ARG BUILDDEPS="py2-pip"
 ARG BUILDCMDS=\
 "   sed -i '/CORS/d' /imagefs$DOWNLOADSDIR/permalink.py "\
 "&& cd /imagefs$DOWNLOADSDIR "\
-"&& python2.7 -O0 -m py_compile permalink.py "\
+"&& python2.7 -OO -m py_compile permalink.py "\
 "&& pip2 install --no-cache-dir --upgrade pip "\
 "&& pip2 install --no-cache-dir --ignore-installed --compile --root /imagefs pip flask gunicorn "\
 "&& sed -i 's|#!/usr/bin/python2|#!/usr/local/bin/python2.7|' /imagefs/usr/bin/gunicorn"
