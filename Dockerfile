@@ -1,8 +1,9 @@
 ARG TAG="20181113-edge"
-ARG RUNDEPS="python3"
+ARG BUILDDEPS="ssl_client"
 ARG BUILDCMDS=\
 "   wget https://raw.githubusercontent.com/sourcepole/qwc2-server/master/permalink.py "\
-"&& pip3 install flask flask_cors" 
+"&& pip3 install flask flask_cors"
+ARG RUNDEPS="python3"
 ARG EXECUTABLES="/usr/bin/python3"
 
 #---------------Don't edit----------------
