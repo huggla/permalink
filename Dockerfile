@@ -1,9 +1,11 @@
 ARG TAG="20181113-edge"
+ARG RUNDEPS="python2 py2-flask py2-gunicorn"
 ARG DOWNLOADSDIR="/permalink"
 ARG DOWNLOADS="https://raw.githubusercontent.com/sourcepole/qwc2-server/master/permalink.py"
-ARG BUILDCMDS="sed -i '/CORS/d' /imagefs$DOWNLOADSDIR/permalink.py"
-ARG RUNDEPS="python2 py2-flask py2-gunicorn"
-ARG EXECUTABLES="/usr/bin/python2 /usr/bin/gunicorn"
+ARG BUILDCMDS=\
+"   sed -i '/CORS/d' /imagefs$DOWNLOADSDIR/permalink.py "\
+"&& sed -i 's|#!/usr/bin/python2|#!/usr/local/bin/python2.7|' /imagefs/usr/bin/gunicorn"
+ARG EXECUTABLES="/usr/bin/python2.7 /usr/bin/gunicorn"
 ARG REMOVEFILES="" 
 
 #---------------Don't edit----------------
