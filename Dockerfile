@@ -16,7 +16,8 @@ COPY --from=build /imagefs /
 #-----------------------------------------
 
 ENV VAR_LINUX_USER="python" \
-    VAR_FINAL_COMMAND="FLASK_APP=/permalink.py /usr/local/bin/python -m flask run -h "0.0.0.0" -p 8080"
+    VAR_THREADS="1" \
+    VAR_FINAL_COMMAND="\$gunicornCmdArgs gunicorn permalink:app"
 
 #---------------Don't edit----------------
 USER starter
