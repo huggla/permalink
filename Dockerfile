@@ -3,7 +3,8 @@ ARG BUILDDEPS="ssl_client"
 ARG BUILDCMDS=\
 "   mkdir /permalink "\
 "&& wget -O /permalink/permalink.py https://raw.githubusercontent.com/sourcepole/qwc2-server/master/permalink.py "\
-"&& pip3 install flask flask_cors"
+"&& sed -i '/CORS/d' /permalink/permalink.py "\
+"&& pip3 install flask gunicorn"
 ARG RUNDEPS="python3"
 ARG EXECUTABLES="/usr/bin/python3"
 
