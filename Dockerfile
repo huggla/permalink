@@ -1,5 +1,5 @@
 ARG TAG="20181113-edge"
-ARG BUILDDEPS="ssl_client"
+ARG BUILDDEPS="wget ssl_client"
 ARG BUILDCMDS=\
 "   mkdir /permalink "\
 "&& wget -O /permalink/permalink.py https://raw.githubusercontent.com/sourcepole/qwc2-server/master/permalink.py "\
