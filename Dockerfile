@@ -1,13 +1,8 @@
 ARG TAG="20181113-edge"
 ARG DOWNLOADSDIR="/permalink"
 ARG DOWNLOADS="https://raw.githubusercontent.com/sourcepole/qwc2-server/master/permalink.py"
-ARG BUILDDEPS="py2-pip"
-ARG BUILDCMDS=\
-"   sed -i '/CORS/d' /imagefs$DOWNLOADSDIR/permalink.py "\
-"&& pip2 install --upgrade pip "\
-"&& pip2 install gunicorn "\
-"&& cp -a /usr/bin/gunicorn /imagefs/usr/bin/gunicorn"
-ARG RUNDEPS="python2 py2-flask"
+ARG BUILDCMDS="sed -i '/CORS/d' /imagefs$DOWNLOADSDIR/permalink.py"
+ARG RUNDEPS="python2 py2-flask py2-gunicorn"
 ARG EXECUTABLES="/usr/bin/python2 /usr/bin/gunicorn"
 ARG REMOVEFILES="" 
 
