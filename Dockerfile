@@ -9,6 +9,7 @@ ARG BUILDCMDS=\
 "&& python2.7 -OO -m py_compile permalink.py "\
 "&& pip2 install --no-cache-dir --upgrade pip "\
 "&& pip2 install --no-cache-dir --ignore-installed --compile --root /imagefs pip flask gunicorn "\
+"&& cp -a /usr/lib/python2.7/site-packages /imagefs/ "\
 "&& sed -i 's|#!/usr/bin/python2|#!/usr/local/bin/python2.7|' /imagefs/usr/bin/gunicorn"
 ARG EXECUTABLES="/usr/bin/python2.7 /usr/bin/gunicorn"
 ARG REMOVEFILES="" 
