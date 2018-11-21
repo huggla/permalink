@@ -1,6 +1,6 @@
 ARG TAG="20181113-edge"
 ARG DOWNLOADSDIR="/permalink"
-ARG DOWNLOADS="https://raw.githubusercontent.com/sourcepole/qwc2-server/master/permalink.py\\ --no-check-certificate"
+ARG DOWNLOADS="http://raw.githubusercontent.com/sourcepole/qwc2-server/master/permalink.py"
 ARG BUILDDEPS="py2-pip"
 ARG BUILDCMDS=\
 "   sed -i '/CORS/d' /imagefs$DOWNLOADSDIR/permalink.py "\
