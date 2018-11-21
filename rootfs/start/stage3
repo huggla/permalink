@@ -1,0 +1,17 @@
+# Set in stage2:
+# ---------------------------------------------------------
+# set -e +a +m +s +i -f
+# isFirstRun
+# VAR_*
+# All functions in /start/functions
+
+if [ "$isFirstRun" == "true" ]
+then
+   gunicornCmdArgs="GUNICORN_CMD_ARGS=\"--pythonpath /pgadmin4 -b 0.0.0.0:5050 --threads $VAR_THREADS --access-logfile - --disable-redirect-access-to-syslog True"
+   if [ "$VAR_ENABLE_TLS" == True ]
+   then
+      gunicornCmdArgs="$gunicornCmdArgs --keyfile $VAR_SSL_KEYFILE --certfile $VAR_SSL_CERTFILE\""
+   else
+      gunicornCmdArgs="$gunicornCmdArgs\""
+   fi
+fi
