@@ -6,7 +6,7 @@ ARG BUILDDEPS="py2-pip"
 ARG BUILDCMDS=\
 "   sed -i '/CORS/d' /imagefs$DOWNLOADSDIR/permalink.py "\
 "&& pip2 install --no-cache-dir --upgrade pip "\
-"&& pip2 install --no-cache-dir --root /imagefs flask gunicorn Jinja2 MarkupSafe Werkzeug click itsdangerous "\
+"&& pip2 install --no-cache-dir --root /imagefs pip flask gunicorn "\
 "&& sed -i 's|#!/usr/bin/python2|#!/usr/local/bin/python2.7|' /imagefs/usr/bin/gunicorn"
 ARG EXECUTABLES="/usr/bin/python2.7 /usr/bin/gunicorn"
 ARG REMOVEFILES="" 
