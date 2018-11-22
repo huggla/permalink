@@ -14,7 +14,7 @@ ARG BUILDCMDS=\
 "&& find /usr/bin/* -type f -delete "\
 "&& find /imagefs/usr/lib/python2.7/site-packages/* -name \"*.py\" -delete "\
 "&& find /imagefs/usr/lib/python2.7/site-packages/* -name \"*.pyo\" | awk -F . '{system(\"rm \"$1\".\"$2\".pyc\")}' "\
-"&& sed -i 's|#!/usr/bin/python2|#!/usr/local/bin/python2.7|' /imagefs/usr/bin/gunicorn "\
+"&& sed -i 's|#!/usr/bin/python2|#!/usr/local/bin/python2.7|' /imagefs/usr/bin/gunicorn"
 ARG EXECUTABLES="/usr/bin/python2.7 /usr/bin/gunicorn"
 ARG REMOVEFILES="/usr/include /usr/share /usr/sbin" 
 
