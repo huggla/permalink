@@ -6,13 +6,13 @@ ARG BUILDDEPS="py2-pip"
 ARG BUILDCMDS=\
 "   sed -i '/CORS/d' /imagefs$DOWNLOADSDIR/permalink.py "\
 "&& python2.7 -OO -m compileall /imagefs$DOWNLOADSDIR "\
-#"&& rm /imagefs$DOWNLOADSDIR/permalink.py "\
+"&& rm /imagefs$DOWNLOADSDIR/permalink.py "\
 "&& pip2 install --no-cache-dir --upgrade pip "\
 "&& pip2 install --no-cache-dir --root /imagefs flask gunicorn "\
 "&& cp -a /usr/lib/python2.7/site-packages/pkg_resources /imagefs/usr/lib/python2.7/site-packages/ "\
 "&& python2.7 -OO -m compileall /imagefs/usr/lib/python2.7/site-packages || true "\
+"&& find /imagefs/usr/lib/python2.7/site-packages/* -name *.py -delete "\
 "&& sed -i 's|#!/usr/bin/python2|#!/usr/local/bin/python2.7|' /imagefs/usr/bin/gunicorn "\
-"&& python2.7 -OO -m compileall /imagefs/usr/bin"
 ARG EXECUTABLES="/usr/bin/python2.7 /usr/bin/gunicorn"
 ARG REMOVEFILES="" 
 
