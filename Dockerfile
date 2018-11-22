@@ -4,18 +4,16 @@ ARG DOWNLOADSDIR="/permalink"
 ARG DOWNLOADS="https://raw.githubusercontent.com/sourcepole/qwc2-server/master/permalink.py"
 ARG BUILDDEPS="py2-pip"
 ARG BUILDCMDS=\
-"   sed -i '/CORS/d' /imagefs$DOWNLOADSDIR/permalink.py "\
-"&& cd /imagefs$DOWNLOADSDIR "\
-"&& python2.7 -OO -m compileall "\
+"   sed -i '/CORS/d' $DOWNLOADSDIR/permalink.py "\
+"&& python2.7 -OO -m compileall $DOWNLOADSDIR "\
 #"&& rm /imagefs$DOWNLOADSDIR/permalink.py "\
 "&& pip2 install --no-cache-dir --upgrade pip "\
-"&& pip2 install --no-cache-dir --ignore-installed --root /imagefs flask gunicorn "\
+"&& pip2 install --no-cache-dir --root /imagefs flask gunicorn "\
 "&& cp -a /usr/lib/python2.7/site-packages/pkg_resources /imagefs/usr/lib/python2.7/site-packages/ "\
-"&& cd /imagefs/usr/lib/python2.7/site-packages "\
-"&& python2.7 -OO -m compileall "\
+"&& python2.7 -OO -m compileall /imagefs/usr/lib/python2.7/site-packages "\
 "&& sed -i 's|#!/usr/bin/python2|#!/usr/local/bin/python2.7|' /imagefs/usr/bin/gunicorn "\
-"&& python2.7 -OO -m py_compile /imagefs/usr/bin/gunicorn"
-ARG EXECUTABLES="/usr/bin/python2.7 /usr/bin/gunicornc /usr/bin/gunicorn"
+"&& python2.7 -OO -m compileall /imagefs/usr/bin"
+ARG EXECUTABLES="/usr/bin/python2.7 /usr/bin/gunicorn"
 ARG REMOVEFILES="" 
 
 #---------------Don't edit----------------
