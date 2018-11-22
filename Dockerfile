@@ -4,8 +4,8 @@ ARG DOWNLOADSDIR="/permalink"
 ARG DOWNLOADS="https://raw.githubusercontent.com/sourcepole/qwc2-server/master/permalink.py"
 ARG BUILDDEPS="py2-pip"
 ARG BUILDCMDS=\
-"   sed -i '/CORS/d' $DOWNLOADSDIR/permalink.py "\
-"&& python2.7 -OO -m compileall $DOWNLOADSDIR "\
+"   sed -i '/CORS/d' /imagefs$DOWNLOADSDIR/permalink.py "\
+"&& python2.7 -OO -m compileall /imagefs$DOWNLOADSDIR "\
 #"&& rm /imagefs$DOWNLOADSDIR/permalink.py "\
 "&& pip2 install --no-cache-dir --upgrade pip "\
 "&& pip2 install --no-cache-dir --root /imagefs flask gunicorn "\
