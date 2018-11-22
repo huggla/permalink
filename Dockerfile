@@ -10,7 +10,7 @@ ARG BUILDCMDS=\
 "&& pip2 install --no-cache-dir --upgrade pip "\
 "&& pip2 install --no-cache-dir --root /imagefs flask gunicorn "\
 "&& cp -a /usr/lib/python2.7/site-packages/pkg_resources /imagefs/usr/lib/python2.7/site-packages/ "\
-"&& python2.7 -OO -m compileall /imagefs/usr/lib/python2.7/site-packages "\
+"&& python2.7 -OO -m compileall /imagefs/usr/lib/python2.7/site-packages || true "\
 "&& sed -i 's|#!/usr/bin/python2|#!/usr/local/bin/python2.7|' /imagefs/usr/bin/gunicorn "\
 "&& python2.7 -OO -m compileall /imagefs/usr/bin"
 ARG EXECUTABLES="/usr/bin/python2.7 /usr/bin/gunicorn"
