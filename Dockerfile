@@ -9,6 +9,7 @@ ARG BUILDCMDS=\
 "&& pip2 install --no-cache-dir --upgrade pip "\
 "&& pip2 install pyinstaller "\
 "&& cd /imagefs$DOWNLOADSDIR "\
+"&& mkdir -p /imagefs/permalink "\
 "&& PYTHONOPTIMIZE=1 pyinstaller --clean --onefile --distpath /imagefs/permalink permalink.py "\
 #"&& pip2 install --no-cache-dir --root /imagefs flask gunicorn "\
 "&& pip2 install --no-cache-dir --root /imagefs gunicorn "\
