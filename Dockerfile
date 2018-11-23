@@ -2,14 +2,15 @@ ARG TAG="20181113-edge"
 ARG RUNDEPS="python2"
 ARG DOWNLOADSDIR="/tmp/permalink"
 ARG DOWNLOADS="https://raw.githubusercontent.com/sourcepole/qwc2-server/master/permalink.py"
-ARG BUILDDEPS="py2-pip"
+ARG BUILDDEPS="py2-pip binutils upx"
 ARG BUILDCMDS=\
 "   sed -i '/CORS/d' /imagefs$DOWNLOADSDIR/permalink.py "\
 #"&& python2.7 -OO -m compileall /imagefs$DOWNLOADSDIR "\
 "&& pip2 install --no-cache-dir --upgrade pip "\
 "&& pip2 install pyinstaller "\
 "&& cd /imagefs$DOWNLOADSDIR "\
-"&& PYTHONOPTIMIZE=1 pyinstaller --clean --onefile permalink.py "\
+"&& ln -s /lib/libc.musl-x86_64.so.1 ldd "\
+"&& PYTHONOPTIMIZE=1 pyinstaller --onefile permalink.py "\
 "&& cp -a dist /imagefs/permalink "\
 #"&& pip2 install --no-cache-dir --root /imagefs flask gunicorn "\
 "&& pip2 install --no-cache-dir --root /imagefs gunicorn "\
