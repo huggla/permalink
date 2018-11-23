@@ -1,23 +1,23 @@
 ARG TAG="20181113-edge"
-ARG RUNDEPS="python2"
+ARG RUNDEPS=""
 ARG DOWNLOADSDIR="/tmp/permalink"
 ARG DOWNLOADS="https://raw.githubusercontent.com/sourcepole/qwc2-server/master/permalink.py"
-ARG BUILDDEPS="py2-pip binutils upx"
+ARG BUILDDEPS="python2 py2-pip binutils upx"
 ARG BUILDCMDS=\
 "   sed -i '/CORS/d' /imagefs$DOWNLOADSDIR/permalink.py "\
 #"&& python2.7 -OO -m compileall /imagefs$DOWNLOADSDIR "\
 "&& pip2 install --no-cache-dir --upgrade pip "\
-"&& pip2 install pyinstaller "\
+"&& pip2 install pyinstaller flask gunicorn "\
 "&& cd /imagefs$DOWNLOADSDIR "\
 "&& ln -s /lib/libc.musl-x86_64.so.1 ldd "\
 "&& PYTHONOPTIMIZE=1 pyinstaller --onefile permalink.py "\
-"&& cp -a dist /imagefs/permalink "\
+"&& cp -a dist /imagefs/permalink "
 #"&& pip2 install --no-cache-dir --root /imagefs flask gunicorn "\
-"&& pip2 install --no-cache-dir --root /imagefs gunicorn "\
+#"&& pip2 install --no-cache-dir --root /imagefs gunicorn "\
 #"&& cp -a /usr/lib/python2.7/site-packages/pkg_resources /imagefs/usr/lib/python2.7/site-packages/ "\
 #"&& find /usr/bin/* -type f -delete "\
 #"&& find /imagefs/usr/lib/python2.7/site-packages/* -name \"*.py\" -delete "\
-"&& sed -i 's|#!/usr/bin/python2|#!/usr/local/bin/python2.7|' /imagefs/usr/bin/gunicorn"
+#"&& sed -i 's|#!/usr/bin/python2|#!/usr/local/bin/python2.7|' /imagefs/usr/bin/gunicorn"
 ARG EXECUTABLES="/usr/bin/python2.7 /usr/bin/gunicorn"
 ARG REMOVEFILES="/sbin /usr/include /usr/share /usr/sbin" 
 
