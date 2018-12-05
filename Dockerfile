@@ -8,7 +8,7 @@ ARG BUILDCMDS=\
 "&& sed -i 's/# Copyright 2018, Sourcepole AG/# Copyright 2018, Sourcepole AG, Henrik Uggla/' /src/permalink.py "\
 "&& cp /buildfs/src/requirements.txt /src/ "\
 "&& cd /src "\
-"&& /pyinstaller/pyinstaller.sh -y -F --clean --exclude-module Werkzeug permalink.py "\
+"&& /pyinstaller/pyinstaller.sh -y -F --clean permalink.py "\
 "&& cp /src/dist/permalink /imagefs/usr/local/bin/"
 ARG EXECUTABLES="/usr/local/bin/permalink"
 ARG REMOVEFILES="/sbin /usr/include /usr/share /usr/sbin" 
