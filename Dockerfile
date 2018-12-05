@@ -22,7 +22,7 @@ COPY --from=build /imagefs /
 #-----------------------------------------
 
 ENV VAR_LINUX_USER="permalink" \
-    VAR_GUNICORN_PARAMS="bind=0.0.0.0:8080"
+    VAR_GUNICORN_PARAMS="bind=0.0.0.0:8080" \
     VAR_FINAL_COMMAND="permalink \$VAR_GUNICORN_PARAMS"
 
 #---------------Don't edit----------------
