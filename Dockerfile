@@ -1,10 +1,7 @@
-ARG TAG="20181113-edge"
-ARG RUNDEPS=""
-ARG DOWNLOADSDIR="/tmp/permalink"
-ARG DOWNLOADS="https://raw.githubusercontent.com/sourcepole/qwc2-server/master/permalink.py"
-ARG BUILDDEPS="python2 py2-pip binutils upx"
+ARG TAG="20181204"
+ARG INITIMAGE="huggla/pyinstaller-alpine:$TAG"
 ARG BUILDCMDS=\
-"   sed -i '/CORS/d' /imagefs$DOWNLOADSDIR/permalink.py "\
+"   /pyinstaller/pyinstaller.sh -y -F --clean permalink.py"\
 #"&& python2.7 -OO -m compileall /imagefs$DOWNLOADSDIR "\
 "&& pip2 install --no-cache-dir --upgrade pip "\
 "&& pip2 install pyinstaller flask gunicorn "\
