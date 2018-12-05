@@ -22,7 +22,7 @@ FROM ${BASEIMAGE:-huggla/base:$TAG} as image
 COPY --from=build /imagefs /
 #-----------------------------------------
 
-ENV VAR_LINUX_USER="permalink" \
+ENV VAR_LINUX_USER="plink" \
     VAR_GUNICORN_PARAMS="bind=0.0.0.0:8080" \
     VAR_FINAL_COMMAND="permalink \$VAR_GUNICORN_PARAMS"
 
