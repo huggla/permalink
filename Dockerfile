@@ -1,35 +1,28 @@
 ARG TAG="20181204"
-ARG INITIMAGE="huggla/pyinstaller-alpine:$TAG"
+ARG CONTENTIMAGE1="huggla/pyinstaller-alpine:$TAG"
 ARG BUILDCMDS=\
-"   /pyinstaller/pyinstaller.sh -y -F --clean permalink.py"\
-#"&& python2.7 -OO -m compileall /imagefs$DOWNLOADSDIR "\
-"&& pip2 install --no-cache-dir --upgrade pip "\
-"&& pip2 install pyinstaller flask gunicorn "\
-"&& cd /imagefs$DOWNLOADSDIR "\
-"&& ln -s /lib/libc.musl-x86_64.so.1 ldd "\
-"&& PYTHONOPTIMIZE=1 pyinstaller --onefile permalink.py "\
-"&& cp -a dist /imagefs/permalink "
-#"&& pip2 install --no-cache-dir --root /imagefs flask gunicorn "\
-#"&& pip2 install --no-cache-dir --root /imagefs gunicorn "\
-#"&& cp -a /usr/lib/python2.7/site-packages/pkg_resources /imagefs/usr/lib/python2.7/site-packages/ "\
-#"&& find /usr/bin/* -type f -delete "\
-#"&& find /imagefs/usr/lib/python2.7/site-packages/* -name \"*.py\" -delete "\
-#"&& sed -i 's|#!/usr/bin/python2|#!/usr/local/bin/python2.7|' /imagefs/usr/bin/gunicorn"
-ARG EXECUTABLES="/usr/bin/python2.7 /usr/bin/gunicorn"
+"   head -62 /buildfs/src/permalink.py.org > /src/permalink.py "\
+"&& sed -i '/CORS/d' /src/permalink.py "\
+"&& tail -26 /buildfs/src/permalink.py.add >> /src/permalink.py "\
+"&& sed -i 's/# Copyright 2018, Sourcepole AG/# Copyright 2018, Sourcepole AG, Henrik Uggla/' /src/permalink.py "\
+"&& cp /buildfs/src/requirements.txt /src/ "\
+"&& cd /src "\
+"&& /pyinstaller/pyinstaller.sh -y -F --clean permalink.py "\
+"&& cp /src/dist/permalink /imagefs/usr/local/bin/"
+ARG EXECUTABLES="/usr/local/bin/permalink"
 ARG REMOVEFILES="/sbin /usr/include /usr/share /usr/sbin" 
 
 #---------------Don't edit----------------
 FROM ${CONTENTIMAGE1:-scratch} as content1
 FROM ${CONTENTIMAGE2:-scratch} as content2
-FROM ${BASEIMAGE:-huggla/base:$TAG} as base
-FROM huggla/build:test as build
+FROM ${INITIMAGE:-${BASEIMAGE:-huggla/base:$TAG}} as init
+FROM ${BUILDIMAGE:-huggla/build:$TAG} as build
 FROM ${BASEIMAGE:-huggla/base:$TAG} as image
 COPY --from=build /imagefs /
 #-----------------------------------------
 
-ENV VAR_LINUX_USER="python" \
-    VAR_THREADS="1" \
-    VAR_FINAL_COMMAND="\$gunicornCmdArgs gunicorn permalink:app"
+ENV VAR_LINUX_USER="permalink" \
+    VAR_FINAL_COMMAND="permalink"
 
 #---------------Don't edit----------------
 USER starter
