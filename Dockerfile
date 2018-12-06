@@ -23,6 +23,9 @@ FROM ${BASEIMAGE:-huggla/base:$TAG} as image
 COPY --from=build /imagefs /
 #-----------------------------------------
 
+RUN chmod go= /bin/* \
+ && chmod g=rx /bin
+
 ENV VAR_LINUX_USER="plink" \
     VAR_GUNICORN_PARAMS="bind=0.0.0.0:8080" \
     VAR_FINAL_COMMAND="permalink \$VAR_GUNICORN_PARAMS"
