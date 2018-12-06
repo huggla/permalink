@@ -9,10 +9,8 @@ ARG BUILDCMDS=\
 "&& cp /buildfs/src/requirements.txt /src/ "\
 "&& sed -i 's|shell=True,|shell=True, executable=\'/usr/local/bin/dash\'|g' /usr/lib/python2.7/ctypes/util.py "\
 "&& cd /src "\
-"&& /pyinstaller/pyinstaller.sh --noconfirm --clean --exclude-module Werkzeug --distpath /imagefs permalink.py "\
-"&& chmod ug=rx,o= /imagefs/permalink "\
-"&& cd /imagefs/usr/local/bin "\
-"&& ln -s ../../../permalink/permalink permalink"
+"&& /pyinstaller/pyinstaller.sh --onefile --noconfirm --clean --exclude-module Werkzeug --distpath /imagefs/usr/local/bin permalink.py"
+ARG EXECUTABLES="/usr/local/bin/permalink"
 ARG REMOVEFILES="/sbin /usr/include /usr/share /usr/sbin" 
 
 #---------------Don't edit----------------
