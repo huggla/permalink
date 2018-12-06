@@ -7,6 +7,7 @@ ARG BUILDCMDS=\
 "&& tail -26 /buildfs/src/permalink.py.add >> /src/permalink.py "\
 "&& sed -i 's/# Copyright 2018, Sourcepole AG/# Copyright 2018, Sourcepole AG, Henrik Uggla/' /src/permalink.py "\
 "&& cp /buildfs/src/requirements.txt /src/ "\
+"&& sed -i 's|shell=True,|shell=True, executable=\'/usr/local/bin/dash\'|g' /usr/lib/python2.7/ctypes/util.py "\
 "&& cd /src "\
 "&& /pyinstaller/pyinstaller.sh --noconfirm --clean --exclude-module Werkzeug --distpath /imagefs permalink.py "\
 "&& chmod ug=rx,o= /imagefs/permalink "\
@@ -22,9 +23,6 @@ FROM ${BUILDIMAGE:-huggla/build:$TAG} as build
 FROM ${BASEIMAGE:-huggla/base:$TAG} as image
 COPY --from=build /imagefs /
 #-----------------------------------------
-
-RUN chmod go= /bin/* \
- && chmod g=rx /bin
 
 ENV VAR_LINUX_USER="plink" \
     VAR_GUNICORN_PARAMS="bind=0.0.0.0:8080" \
