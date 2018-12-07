@@ -4,7 +4,7 @@ ARG CONTENTDESTINATION1="/"
 ARG BUILDDEPS="dash"
 ARG BUILDCMDS=\
 "   head -62 /buildfs/src/permalink.py.org > /src/permalink.py "\
-"&& sed -i '/CORS/d' /src/permalink.py "\
+#"&& sed -i '/CORS/d' /src/permalink.py "\
 "&& tail -26 /buildfs/src/permalink.py.add >> /src/permalink.py "\
 "&& sed -i 's/# Copyright 2018, Sourcepole AG/# Copyright 2018, Sourcepole AG, Henrik Uggla/' /src/permalink.py "\
 "&& cp /buildfs/src/requirements.txt /src/ "\
