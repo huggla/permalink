@@ -4,7 +4,6 @@ ARG CONTENTDESTINATION1="/"
 ARG BUILDDEPS="dash"
 ARG BUILDCMDS=\
 "   head -62 /buildfs/src/permalink.py.org > /src/permalink.py "\
-#"&& sed -i '/CORS/d' /src/permalink.py "\
 "&& tail -26 /buildfs/src/permalink.py.add >> /src/permalink.py "\
 "&& sed -i 's/# Copyright 2018, Sourcepole AG/# Copyright 2018, Sourcepole AG, Henrik Uggla/' /src/permalink.py "\
 "&& cp /buildfs/src/requirements.txt /src/ "\
@@ -25,7 +24,7 @@ COPY --from=build /imagefs /
 #-----------------------------------------
 
 ENV VAR_LINUX_USER="plink" \
-    VAR_GUNICORN_PARAMS="bind=0.0.0.0:8080" \
+    VAR_GUNICORN_PARAMS="bind=0.0.0.0:5001" \
     VAR_FINAL_COMMAND="permalink \$VAR_GUNICORN_PARAMS"
 
 #---------------Don't edit----------------
